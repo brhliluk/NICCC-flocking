@@ -6,7 +6,7 @@ public class Cannonball : MonoBehaviour
 {
     public float lifetime = 5.0f;
 
-    public void SetLight(Light origin, Light target)
+    /*public void SetLight(Light origin, Light target)
     {
         ParticleSystem ps = this.transform.GetChild(0).GetComponent<ParticleSystem>();
         var col = ps.colorOverLifetime;
@@ -17,6 +17,34 @@ public class Cannonball : MonoBehaviour
                             new GradientColorKey(target.color, 0.0f),
                             new GradientColorKey(origin.color, 45.6f/100.0f),
                             new GradientColorKey(origin.color, 1.0f) },
+            new GradientAlphaKey[] {
+                            new GradientAlphaKey(240.0f/255.0f, 0.0f),
+                            new GradientAlphaKey(180.0f/255.0f, 68.5f/100.0f),
+                            new GradientAlphaKey(0.0f, 1.0f) });
+        col.color = grad;
+    }*/
+
+    public void SetLight(float intensity)
+    {
+        ParticleSystem ps = this.transform.GetChild(0).GetComponent<ParticleSystem>();
+        var col = ps.colorOverLifetime;
+        col.enabled = true;
+
+        Gradient instensityGrad = new Gradient();
+        instensityGrad.SetKeys(new GradientColorKey[] {
+                            new GradientColorKey(Color.blue, 0.0f),
+                            new GradientColorKey(Color.red, 1.0f) },
+            new GradientAlphaKey[] {
+                            new GradientAlphaKey(255.0f, 0.0f),
+                            new GradientAlphaKey(255.0f, 1.0f) });
+
+
+        Color picked = instensityGrad.Evaluate(intensity);
+        Gradient grad = new Gradient();
+        grad.SetKeys(new GradientColorKey[] {
+                            new GradientColorKey(picked, 0.0f),
+                            new GradientColorKey(picked, 45.6f/100.0f),
+                            new GradientColorKey(picked, 1.0f) },
             new GradientAlphaKey[] {
                             new GradientAlphaKey(240.0f/255.0f, 0.0f),
                             new GradientAlphaKey(180.0f/255.0f, 68.5f/100.0f),
@@ -46,6 +74,26 @@ public class Cannonball : MonoBehaviour
         rigid.useGravity = true;
         Destroy(this.gameObject, lifetime);
     }
+
+    public void SetEmissions(float intensity)
+    {
+        ParticleSystem ps = this.transform.GetChild(0).GetComponent<ParticleSystem>();
+        var em = ps.emission;
+        em.enabled = true;
+        
+        em.rateOverTime = intensity * 20.0f + 10.0f;
+
+        // nastavení size
+        var sizeOverLifetime = ps.sizeOverLifetime;
+        sizeOverLifetime.enabled = true;
+
+        AnimationCurve curve = new AnimationCurve();
+        curve.AddKey(0.0f,intensity * 1.0f + 1.0f);
+        curve.AddKey(1.0f,             0.0f);
+
+        sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1.0f, curve);
+    }
+
 
     void Start()
     {
