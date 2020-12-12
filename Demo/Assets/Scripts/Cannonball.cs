@@ -6,6 +6,24 @@ public class Cannonball : MonoBehaviour
 {
     public float lifetime = 5.0f;
 
+    public void SetLight(Light origin, Light target)
+    {
+        ParticleSystem ps = this.transform.GetChild(0).GetComponent<ParticleSystem>();
+        var col = ps.colorOverLifetime;
+        col.enabled = true;
+
+        Gradient grad = new Gradient();
+        grad.SetKeys(new GradientColorKey[] {
+                            new GradientColorKey(target.color, 0.0f),
+                            new GradientColorKey(origin.color, 45.6f/100.0f),
+                            new GradientColorKey(origin.color, 1.0f) },
+            new GradientAlphaKey[] {
+                            new GradientAlphaKey(240.0f/255.0f, 0.0f),
+                            new GradientAlphaKey(180.0f/255.0f, 68.5f/100.0f),
+                            new GradientAlphaKey(0.0f, 1.0f) });
+        col.color = grad;
+    }
+
     public void Shoot(Light target_GO, float initialAngle) {
         var rigid = GetComponent<Rigidbody>();
         var dir = target_GO.transform.position - transform.position;  // get target direction

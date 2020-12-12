@@ -27,6 +27,7 @@ public class Spawner : MonoBehaviour
             time = 0.0f;
 
             GameObject sphere = Instantiate(Streak, origin.transform.position, Quaternion.identity) as GameObject;
+            //sphere.GetComponent<Cannonball>().SetLight(origin, target);
             sphere.GetComponent<Cannonball>().Shoot(target, Random.Range(30.0f,70.0f));
             // execute block of code here
         }
