@@ -14,16 +14,22 @@ public class Spawner : MonoBehaviour
     // ------------------------------------
 
     private  GameObject[]  targets;
-    string[] targetNames = {"Praha", "Cernosice", "Hostivice", "Kladno"};
-    float[,] angles = {{ 0, 45,45,45},
-                       {55, 0, 0, 0},
-                       {55, 0, 0, 0},
-                       {55, 0, 0, 0}};
+    string[] targetNames = {"Praha", "Cernosice", "Kralupy", "Kladno", "Ricany", "Brandys"};
+    float[,] angles = {{ 0, 45,45,45, 45, 45},
+                       {55, 0, 0, 0, 0, 0},
+                       {55, 0, 0, 0, 0, 0},
+                       {55, 0, 0, 0, 0, 0},
+                       {55, 0, 0, 0, 0, 0},
+                       {55, 0, 0, 0, 0, 0}};
 
-    float[,] intensities = {{ 0.0f,0.37f,0.04f,0.01f},
-                            {0.96f, 0.0f, 0.0f, 0.0f},
-                            {0.02f, 0.0f, 0.0f, 0.0f},
-                            {0.03f, 0.0f, 0.0f, 0.0f}};
+    float[,] intensities = {{0.00f, 0.37f,0.02f,0.05f, 0.19f, 0.22f},
+                            {0.97f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f},
+                            {0.09f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f},
+                            {0.28f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f},
+                            {0.32f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f},
+                            {0.65f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f},
+
+    };
 
     // ------------------------------------
 
